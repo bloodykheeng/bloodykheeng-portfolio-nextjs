@@ -15,7 +15,7 @@ const eslintConfig = defineConfig([
       "react-hooks/set-state-in-effect": "off",
 
       // 🔕 disable warning for unescaped entities in JSX (e.g., apostrophes)
-      "no-unescaped-entities": "off",
+      "react/no-unescaped-entities": "off",
     },
   },
   // Override default ignores of eslint-config-next.

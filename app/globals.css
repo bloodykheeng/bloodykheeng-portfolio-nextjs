@@ -42,3 +42,7 @@ html {
   background: #f5c518;
   color: #000;
 }
+
+iframe[src*="tawk.to"] {
+  bottom: 30px !important;
+}

@@ -177,10 +177,26 @@ export default function Navbar() {
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: i * 0.06 }}
                                         onClick={() => { setActive(link.label); setMenuOpen(false); }}
-                                        className={`py-4 text-[28px] font-['Syne'] font-extrabold border-b tracking-tight
-                    ${isDark ? "text-white border-white/10 hover:text-[#F5C518]" : "text-black border-black/10 hover:text-[#D4A017]"}`}
+                                        // ✅ Fixed: active state color + dot sits on the right with flex, no squishing
+                                        className={`py-4 text-[28px] font-['Syne'] font-extrabold border-b tracking-tight flex items-center justify-between
+                    ${isDark
+                                                ? active === link.label
+                                                    ? "text-[#F5C518] border-white/10"
+                                                    : "text-white border-white/10 hover:text-[#F5C518]"
+                                                : active === link.label
+                                                    ? "text-[#D4A017] border-black/10"
+                                                    : "text-black border-black/10 hover:text-[#D4A017]"
+                                            }`}
                                     >
                                         {link.label}
+
+                                        {/* ✅ Active dot — floated right via flex justify-between, never squishes the label */}
+                                        {active === link.label && (
+                                            <motion.span
+                                                layoutId="mobile-nav-dot"
+                                                className="w-2 h-2 rounded-full bg-[#F5C518] shrink-0 ml-4"
+                                            />
+                                        )}
                                     </motion.a>
                                 ))}
                             </nav>
