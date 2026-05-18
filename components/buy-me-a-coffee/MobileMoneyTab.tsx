@@ -43,6 +43,7 @@ export default function MobileMoneyTab() {
     const [timedOut, setTimedOut] = useState(false);
     const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
     const mounted = useRef(true);
+    const amountInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         mounted.current = true;
@@ -299,11 +300,27 @@ export default function MobileMoneyTab() {
                         UGX
                     </span>
                     <input
-                        type="number"
-                        min={500}
-                        value={amount}
-                        onChange={e => { setAmount(e.target.value); clearFieldError("amount"); }}
-                        placeholder="5000"
+                        ref={amountInputRef}
+                        type="text"
+                        inputMode="numeric"
+                        value={amount ? Number(amount).toLocaleString("en-US") : ""}
+                        onChange={e => {
+                            const el = e.currentTarget;
+                            const cursor = el.selectionStart ?? 0;
+                            const oldFormatted = el.value;
+                            const raw = oldFormatted.replace(/,/g, "").replace(/\D/g, "");
+                            const newFormatted = raw ? Number(raw).toLocaleString("en-US") : "";
+                            // adjust cursor for commas added/removed
+                            const oldCommas = (oldFormatted.slice(0, cursor).match(/,/g) || []).length;
+                            const newCommas = (newFormatted.slice(0, cursor).match(/,/g) || []).length;
+                            const newCursor = cursor + (newCommas - oldCommas);
+                            setAmount(raw);
+                            clearFieldError("amount");
+                            requestAnimationFrame(() => {
+                                amountInputRef.current?.setSelectionRange(newCursor, newCursor);
+                            });
+                        }}
+                        placeholder="5,000"
                         style={{ ...inputStyle("amount"), flex: 1 }}
                     />
                 </div>

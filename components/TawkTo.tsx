@@ -179,8 +179,8 @@ export default function TawkTo() {
     //     };
 
     //     const handleIframe = (iframe: HTMLIFrameElement) => {
-    //         try {
-    //             const apply = () => {
+    //         const apply = () => {
+    //             try {
     //                 const doc =
     //                     iframe.contentDocument ||
     //                     iframe.contentWindow?.document;
@@ -188,14 +188,13 @@ export default function TawkTo() {
     //                 if (!doc) return;
 
     //                 injectStyle(doc);
-    //             };
+    //             } catch {
+    //                 // cross-origin iframe — expected for non-tawk iframes
+    //             }
+    //         };
 
-    //             apply();
-
-    //             iframe.addEventListener("load", apply);
-    //         } catch {
-    //             // cross-origin iframe
-    //         }
+    //         apply();
+    //         iframe.addEventListener("load", apply);
     //     };
 
     //     // existing iframes
