@@ -2,14 +2,6 @@
 
 import { useEffect } from "react";
 
-interface TawkWindow extends Window {
-    Tawk_API?: {
-        onChatMaximized?: () => void;
-        onChatMinimized?: () => void;
-        onChatHidden?: () => void;
-    };
-}
-
 
 export default function TawkTo() {
     // ================== embed tawk.to script ==================
