@@ -10,7 +10,7 @@ import {
     RiArrowDownLine,
     RiDownloadLine,
 } from "react-icons/ri";
-import CoffeeModal from "@/components/CoffeeModal";
+import CoffeeModal from "@/components/buy-me-a-coffee/CoffeeModal";
 
 const ROLES = [
     "Full Stack Developer",
